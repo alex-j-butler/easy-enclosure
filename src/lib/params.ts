@@ -66,6 +66,9 @@ export type Params = {
   wallMountScrewDiameter: number,
   screws: boolean,
   screwDiameter: number,
+  brassInserts: boolean,
+  brassInsertDiameter: number,
+  brassInsertHeight: number,
 }
 
 const defaults: Params = {
@@ -161,6 +164,9 @@ const defaults: Params = {
   wallMountScrewDiameter: 3.98,
   screws: true,
   screwDiameter: 2.98,
+  brassInserts: false,
+  brassInsertDiameter: 3,
+  brassInsertHeight: 5
 }
 
 const paramState = hookstate(defaults)

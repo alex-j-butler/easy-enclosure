@@ -6,6 +6,7 @@ import { flanges } from './wallmount'
 import { clover, hollowRoundCube, roundedCube } from './utils'
 import { waterProofSealCutout } from './waterproofseal'
 import { screws } from './screws'
+import { brassInserts } from './brassinserts'
 import { translate } from '@jscad/modeling/src/operations/transforms'
 
 const { subtract, union } = booleans
@@ -21,7 +22,8 @@ export const base = (params: Params) => {
     _wall = (wall * 2) + (insertClearance * 2) + insertThickness
   }
 
-  if (params.screws) {
+  if (params.screws && !params.brassInserts) {
+    console.log("screws in base");
     body.push(subtract(
       roundedCube(width, length, height, cornerRadius),
       translate([
@@ -35,6 +37,21 @@ export const base = (params: Params) => {
       ))
     ))
     subtracts.push(screws(params))
+  } else if (params.screws && params.brassInserts) {
+    console.log("brass inserts in base");
+    body.push(subtract(
+      roundedCube(width, length, height, cornerRadius),
+      translate([
+        _wall,_wall,floor
+      ], 
+      clover(
+        width-(_wall*2), 
+        length-(_wall*2), 
+        height, 
+        (cornerRadius+wall)/2
+      ))
+    ))
+    subtracts.push(brassInserts(params))
   } else {
     body.push(hollowRoundCube(width, length, height, _wall, cornerRadius))
   }

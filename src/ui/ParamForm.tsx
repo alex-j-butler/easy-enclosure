@@ -49,7 +49,8 @@ export const ParamsForm = () => {
   const { length, width, height, floor, roof, wall, cornerRadius, wallMountScrewDiameter, 
     holes, pcbMounts, wallMounts, 
     waterProof, screws, screwDiameter, sealThickness, insertThickness, insertHeight, 
-    insertClearance  } = useParams()
+    insertClearance,
+    brassInserts, brassInsertDiameter, brassInsertHeight  } = useParams()
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement| HTMLSelectElement>, set: (v: number) => void) => {
     e.currentTarget.value && set(parseFloat(e.currentTarget.value))
@@ -183,13 +184,30 @@ export const ParamsForm = () => {
       </Accordian>
 
       <Accordian title="Lid Screws" active={activeTab === 6} onClick={() => _setActiveTab(6)}>
-        <CheckBox label="Lid Screws" checked={screws.value} onChange={(e) => {
+      <CheckBox label="Lid Screws" checked={screws.value} onChange={(e) => {
           screws.set(e.currentTarget.checked)
           !e.currentTarget.checked && waterProof.set(false)
-        }} />
+        }} />        
         {
           screws.value &&
-            <NumberInput label="Screw Diameter" value={screwDiameter.value} min={1} step={0.01} onChange={(e) => handleChange(e, screwDiameter.set)} />
+            <div className="sub-params">
+              <NumberInput label="Screw Diameter" value={screwDiameter.value} min={1} step={0.01} onChange={(e) => handleChange(e, screwDiameter.set)} />
+            </div>
+        }
+        {
+          screws.value &&
+            <CheckBox label="Brass Inserts" checked={brassInserts.value} onChange={(e) => {
+              brassInserts.set(e.currentTarget.checked)
+              !e.currentTarget.checked && waterProof.set(false)
+              !e.currentTarget.checked && screws.set(true);
+            }} />
+        }
+        {
+          brassInserts.value &&
+            <div className="sub-params">
+              <NumberInput label="Insert Diameter" value={brassInsertDiameter.value} min={1} step={0.01} onChange={(e) => handleChange(e, brassInsertDiameter.set)} />
+              <NumberInput label="Insert Height" value={brassInsertHeight.value} min={1} step={0.01} onChange={(e) => handleChange(e, brassInsertHeight.set)} />
+            </div>
         }
       </Accordian>
 

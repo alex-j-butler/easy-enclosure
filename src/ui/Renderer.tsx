@@ -41,7 +41,7 @@ const panSpeed = 1
 const zoomSpeed = 0.08
 
 const lidDeps = ['length', 'width', 'roof', 'wall', 'cornerRadius', 'screws', 'waterProof', 'screwDiameter', 'insertThickness', 'insertHeight', 'insertClearance', 'holes']
-const baseDeps = ['length', 'width', 'height', 'wall', 'floor', 'cornerRadius', 'holes', 'wallMounts', 'screws', 'waterProof', 'screwDiameter', 'insertThickness', 'insertHeight', 'sealThickness', 'wallMountScrewDiameter', 'insertClearance']
+const baseDeps = ['length', 'width', 'height', 'wall', 'floor', 'cornerRadius', 'holes', 'wallMounts', 'screws', 'waterProof', 'screwDiameter', 'insertThickness', 'insertHeight', 'sealThickness', 'wallMountScrewDiameter', 'insertClearance', 'brassInserts', 'brassInsertDiameter', 'brassInsertHeight']
 const sealDeps = ['length', 'width', 'wall', 'cornerRadius', 'waterProof', 'sealThickness', 'insertClearance', 'insertThickness']
 const mountDeps = ['pcbMounts', 'waterProof', 'wall', 'floor', 'height']
 
